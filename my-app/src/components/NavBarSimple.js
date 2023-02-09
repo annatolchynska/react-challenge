@@ -1,40 +1,36 @@
-import React from "react";
-import css from './css/NavBarSimple.module.css';
+import React, { Component } from "react";
+import css from "./css/NavBarSimple.module.css";
 
-class NavBarSimple extends React.Component {
+class NavBarSimple extends Component {
+
     constructor(props) {
-      super(props);
-      this.state = {
-        message: "Hello,guest!",
-        buttonText: "Log In"
+        super(props);
         
-      };
-}
-handleClick() {
-    this.setState((prevState, prevProps) => {
-      console.log("Previous State:", prevState);
-      console.log("Previous State:", prevState);
-            return {
-        buttonText:
-        prevState.buttonText === "Log In" ? "Log Out" : "Log In",
-        message:
-        prevState.message === "Hello, guest!" ? "Welcome back, user!" : "Hello, guest!"
-              };
-    });
-  }
-  render() {
-    return (
-      <div>
-        <h1>
-          My gallery
-        </h1>
-        <span>{this.state.message}</span>
-        <button onClick={() => this.handleClick()}>
-          {this.state.buttonText}
-        </button>
-    </div>
-    );
-  }
+        this.state = {
+            message: "Hello, guest!",
+            buttonText: "Log in"
+        }
+    }
+
+    handleclick = () => {
+        this.setState((prevState) => ({
+            message: prevState.message === "Hello, guest!" ? "Welcome back, user!" : "Hello, guest!",
+            buttonText: prevState.buttonText === "Log out" ? "Log in" : "Log out",
+        }), ()=> console.log(this.state.message))
+        
+    }
+
+    render() {
+        return (
+            <div className={css.NavBar}>
+                <h1>My Gallery</h1>
+                <div>
+                    <span>{this.state.message}</span>
+                    <button onClick={() => this.handleclick()}>{this.state.buttonText}</button>
+                </div>
+            </div>
+        )
+    }
 }
 
-export default NavBarSimple;
+export default NavBarSimple
